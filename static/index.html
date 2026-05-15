@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetroPath - Planificador de Rutas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d15392.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">M</span>
+                <h1>MetroPath</h1>
+            </div>
+            
+            <div class="search-section">
+                <div class="input-section-card">
+                    <div class="input-group">
+                        <label for="origin"><i class="fas fa-map-marker-alt"></i> Estación Origen</label>
+                        <input type="text" id="origin" placeholder="Busca tu estación..." autocomplete="off">
+                        <div id="origin-suggestions" class="suggestions"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="destination"><i class="fas fa-flag-checkered"></i> Estación Destino</label>
+                        <input type="text" id="destination" placeholder="¿A dónde vas?" autocomplete="off">
+                        <div id="destination-suggestions" class="suggestions"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fas fa-sliders-h"></i> Criterio de Búsqueda</label>
+                        <div class="criteria-selector">
+                            <button class="crit-btn active" data-crit="time">Tiempo</button>
+                            <button class="crit-btn" data-crit="distance">Distancia</button>
+                            <button class="crit-btn" data-crit="cost">Costo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="search-btn" class="main-btn">Trazar Mejor Ruta</button>
+            </div>
+
+        </aside>
+
+        <div id="results-panel" class="results-overlay hidden">
+            <div class="results-header">
+                <div class="logo-icon small">R</div>
+                <h3>Detalles del Viaje</h3>
+                <button id="close-results" class="close-btn">&times;</button>
+            </div>
+
+            <div class="results-body">
+                <div class="metric-group">
+                    <span class="res-label">Costo Total</span>
+                    <span id="res-cost" class="res-value">--</span>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="res-metric secondary">
+                        <span class="res-label">A* (Tiempo)</span>
+                        <span id="comp-a-val" class="res-sub">--</span>
+                    </div>
+                    <div class="res-metric secondary">
+                        <span class="res-label">Dijkstra (Tiempo)</span>
+                        <span id="comp-d-val" class="res-sub">--</span>
+                    </div>
+                </div>
+
+                <div class="itinerary-section">
+                    <span class="res-label">Recorrido Sugerido</span>
+                    <div id="path-list" class="itinerary-vertical"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Map Area -->
+        <main class="map-container">
+            <div id="map-controls">
+                <button id="zoom-in" title="Acercar">+</button>
+                <button id="zoom-out" title="Alejar">-</button>
+            </div>
+            <svg id="network-svg" width="100%" height="100%">
+                <g id="zoom-group">
+                    <g id="edges-layer"></g>
+                    <g id="nodes-layer"></g>
+                    <g id="labels-layer"></g>
+                </g>
+            </svg>
+            <div id="map-legend">
+                <div class="legend-title">Líneas de Metro</div>
+                <div class="legend-item"><span class="legend-dot line-a"></span> Línea A</div>
+                <div class="legend-item"><span class="legend-dot line-b"></span> Línea B</div>
+                <div class="legend-item"><span class="legend-dot line-k"></span> Línea K</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
