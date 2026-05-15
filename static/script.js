@@ -101,13 +101,13 @@ function resetView() {
 
 function project(x, y) {
     const svg = document.getElementById('network-svg');
-    const centerX = svg.clientWidth * 0.55; // More central positioning
+    const centerX = svg.clientWidth * 0.55; 
     const centerY = svg.clientHeight / 2;
     
-    const scale = 20; // Reduced scale for better visibility
+    const scale = 20; 
     
     return {
-        x: centerX + (x * scale * 1.8), // Slightly increased horizontal spread
+        x: centerX + (x * scale * 1.8), 
         y: centerY - (y * scale * 0.9)  
     };
 }
@@ -117,13 +117,13 @@ function renderMap(highlightedPath = []) {
     const nodesLayer = document.getElementById('nodes-layer');
     const labelsLayer = document.getElementById('labels-layer');
     
-    if (!edgesLayer) return; // Wait for DOM
+    if (!edgesLayer) return; 
     
     edgesLayer.innerHTML = '';
     nodesLayer.innerHTML = '';
     labelsLayer.innerHTML = '';
 
-    // Draw Edges
+    
     graphData.connections.forEach(conn => {
         const from = stations.find(s => s.id === conn.from);
         const to = stations.find(s => s.id === conn.to);
@@ -166,10 +166,10 @@ function renderMap(highlightedPath = []) {
 
         nodesLayer.appendChild(circle);
 
-        // Better Label Positioning
+        
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         
-        // Offset label based on line or position to avoid overlap
+       
         let dx = 12;
         let dy = 4;
         if (s.line === 'B') {
