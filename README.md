@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 =======
 # MetroPath: Sistema de Planificación de Rutas de Transporte Público
 
